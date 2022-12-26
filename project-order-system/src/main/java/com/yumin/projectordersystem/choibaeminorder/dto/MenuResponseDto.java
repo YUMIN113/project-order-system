@@ -1,7 +1,6 @@
 package com.yumin.projectordersystem.choibaeminorder.dto;
 
 import com.yumin.projectordersystem.choibaeminorder.domain.Menu;
-import com.yumin.projectordersystem.choibaeminorder.domain.Store;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +14,7 @@ public class MenuResponseDto {
 
     private Long menuId;
 
-    private Store store;
+    private Long storeId;
 
     private String menuName;
 
@@ -27,24 +26,23 @@ public class MenuResponseDto {
 
     @Builder
     public MenuResponseDto(Long menuId,
-                           Store store,
+                           Long storeId,
                            String menuName,
                            Integer menuPrice,
                            LocalDateTime createAt,
                            LocalDateTime modifyAt) {
         this.menuId = menuId;
-        this.store = store;
+        this.storeId = storeId;
         this.menuName = menuName;
         this.menuPrice = menuPrice;
         this.createAt = createAt;
         this.modifyAt = modifyAt;
     }
 
-
     public static MenuResponseDto of(Menu menu) {
         return MenuResponseDto.builder()
                 .menuId(menu.getMenuId())
-                .store(menu.getStore())
+                .storeId(menu.getStoreId())
                 .menuName(menu.getMenuName())
                 .menuPrice(menu.getMenuPrice())
                 .createAt(menu.getCreateAt())

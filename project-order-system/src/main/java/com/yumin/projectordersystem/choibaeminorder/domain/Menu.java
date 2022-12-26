@@ -19,9 +19,8 @@ public class Menu {
     @Column(name = "menu_id")
     private Long menuId;
 
-    @ManyToOne
-    @JoinColumn(name = "store_id")
-    private Store store;
+    @Column(name = "store_id")
+    private Long storeId;
 
     @Column(name = "menu_name")
     private String menuName;
@@ -38,8 +37,8 @@ public class Menu {
     private LocalDateTime modifyAt;
 
     @Builder
-    public Menu(Store store, String menuName, Integer menuPrice) {
-        this.store = store;
+    public Menu(Long storeId, String menuName, Integer menuPrice) {
+        this.storeId = storeId;
         this.menuName = menuName;
         this.menuPrice = menuPrice;
     }

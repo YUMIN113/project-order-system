@@ -17,8 +17,4 @@ public class MenuController {
         this.menuService = menuService;
     }
 
-    @GetMapping("/list")
-    public ResponseEntity<List<MenuResponseDto>> findAllMenuList() {
-        return ResponseEntity.ok(menuService.getMenuList());
-    }
 }

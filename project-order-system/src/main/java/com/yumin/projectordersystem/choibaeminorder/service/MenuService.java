@@ -10,16 +10,16 @@ import java.util.stream.Collectors;
 @Service
 public class MenuService {
 
-    private MenuRepository menuRepository;
+    private final MenuRepository menuRepository;
 
     public MenuService(MenuRepository menuRepository) {
         this.menuRepository = menuRepository;
     }
 
-    // 메뉴 목록 보여주기
-    public List<MenuResponseDto> getMenuList() {
+    // 점포 별 메뉴 목록 보여주기
+    public List<MenuResponseDto> getStoreMenuList(Long storeId) {
         return menuRepository
-                .findAll()
+                .findByStoreId(storeId)
                 .stream()
                 .map(MenuResponseDto::of)
                 .collect(Collectors.toList());

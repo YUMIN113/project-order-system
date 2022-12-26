@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 @ToString
 @Getter
-@Entity
+@Entity(name = "customer_order")
 @NoArgsConstructor
 public class Order {
 
