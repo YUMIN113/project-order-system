@@ -1,6 +1,5 @@
 package com.yumin.projectordersystem.choibaeminorder.service;
 
-import com.yumin.projectordersystem.choibaeminorder.domain.Store;
 import com.yumin.projectordersystem.choibaeminorder.dto.StoreResponseDto;
 import com.yumin.projectordersystem.choibaeminorder.repository.StoreRepository;
 import org.springframework.stereotype.Service;

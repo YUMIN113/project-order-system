@@ -23,19 +23,19 @@ public class MenuRepositoryTests {
     private StoreRepository storeRepository;
 
 
-    @Test
-    public void menuSaveTest() {
-
-        // store 에서 store_id 찾아서 menu 의 store_id column 에 등록하기 위한 과정
-        Optional<Store> storeWrapper = storeRepository.findByStoreId(3L);
-        Store store = storeWrapper.get();
-
-        Menu saveMenu = Menu.builder()
-                .menuName("츠케멘")
-                .menuPrice(13000)
-                .store(store)
-                .build();
-
-        menuRepository.save(saveMenu);
-    }
+//    @Test
+//    public void menuSaveTest() {
+//
+//        // store 에서 store_id 찾아서 menu 의 store_id column 에 등록하기 위한 과정
+//        Optional<Store> storeWrapper = storeRepository.findByStoreId(3L);
+//        Store store = storeWrapper.get();
+//
+//        Menu saveMenu = Menu.builder()
+//                .menuName("츠케멘")
+//                .menuPrice(13000)
+//                .store(store)
+//                .build();
+//
+//        menuRepository.save(saveMenu);
+//    }
 }

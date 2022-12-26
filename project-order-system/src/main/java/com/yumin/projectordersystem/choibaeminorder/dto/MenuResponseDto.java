@@ -40,11 +40,11 @@ public class MenuResponseDto {
         this.modifyAt = modifyAt;
     }
 
-    // 확인 필요
+
     public static MenuResponseDto of(Menu menu) {
         return MenuResponseDto.builder()
                 .menuId(menu.getMenuId())
-                .store(new Store())
+                .store(menu.getStore())
                 .menuName(menu.getMenuName())
                 .menuPrice(menu.getMenuPrice())
                 .createAt(menu.getCreateAt())
