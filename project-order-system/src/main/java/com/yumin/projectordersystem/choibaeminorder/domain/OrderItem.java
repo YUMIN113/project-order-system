@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 @ToString
 @Getter
-@Entity(name = "customer_order_item")
+@Entity(name = "customer_order_item") // entity 와 table 명 같게 설정
 @NoArgsConstructor
 public class OrderItem {
 
@@ -46,4 +46,5 @@ public class OrderItem {
         this.menu = menu;
         this.orderCnt = orderCnt;
     }
+
 }
