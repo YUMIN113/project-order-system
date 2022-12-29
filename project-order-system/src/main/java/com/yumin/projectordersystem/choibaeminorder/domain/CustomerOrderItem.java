@@ -40,7 +40,6 @@ public class CustomerOrderItem {
     private LocalDateTime modifyAt;
 
     @Builder
-
     public CustomerOrderItem(Long orderId, Long menuId, Integer menuCnt) {
         this.orderId = orderId;
         this.menuId = menuId;
