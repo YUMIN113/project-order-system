@@ -48,6 +48,7 @@ public class CustomerOrder {
         this.totalPrice = totalPrice;
     }
 
+    // 주문 생성 메서드
     public static CustomerOrder createCustomerOrder(Long storeId, Integer totalPrice) {
 
         return CustomerOrder.builder()
