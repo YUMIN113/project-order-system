@@ -1,5 +1,6 @@
 package com.yumin.projectordersystem.choibaeminorder.domain;
 
+import com.yumin.projectordersystem.choibaeminorder.dto.CustomerOrderItemRequestDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,23 +15,21 @@ import java.time.LocalDateTime;
 @Getter
 @Entity(name = "customer_order_item") // entity 와 table 명 같게 설정
 @NoArgsConstructor
-public class OrderItem {
+public class CustomerOrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_item_id")
     private Long orderItemId;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @Column(name = "order_id")
+    private Long orderId;
 
-    @ManyToOne
-    @JoinColumn(name = "menu_id")
-    private Menu menu;
+    @Column(name = "menu_id")
+    private Long menuId;
 
     @Column(name = "order_cnt")
-    private Integer orderCnt;
+    private Integer menuCnt;
 
     @CreationTimestamp
     @Column(name = "create_at")
@@ -41,10 +40,18 @@ public class OrderItem {
     private LocalDateTime modifyAt;
 
     @Builder
-    public OrderItem(Order order, Menu menu, Integer orderCnt) {
-        this.order = order;
-        this.menu = menu;
-        this.orderCnt = orderCnt;
+
+    public CustomerOrderItem(Long orderId, Long menuId, Integer menuCnt) {
+        this.orderId = orderId;
+        this.menuId = menuId;
+        this.menuCnt = menuCnt;
     }
 
+    public static CustomerOrderItem createEnrollCustomerOrderItem(Long orderId, CustomerOrderItemRequestDto customerOrderItemRequestDto) {
+        return CustomerOrderItem.builder()
+                .orderId(orderId)
+                .menuId(customerOrderItemRequestDto.getMenuId())
+                .menuCnt(customerOrderItemRequestDto.getMenuCnt())
+                .build();
+    }
 }

@@ -5,26 +5,24 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-@ToString
+
 @Getter
 @Entity(name = "customer_order")
 @NoArgsConstructor
-public class Order {
+public class CustomerOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private Long orderId;
 
-    @ManyToOne
-    @JoinColumn(name = "store_id")
-    private Store store;
+    @Column(name = "store_id")
+    private Long storeId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "order_status")
@@ -42,9 +40,21 @@ public class Order {
     private LocalDateTime modifyAt;
 
     @Builder
-    public Order(Store store, OrderStatus orderStatus, Integer totalPrice) {
-        this.store = store;
+    public CustomerOrder(Long storeId,
+                         OrderStatus orderStatus,
+                         Integer totalPrice) {
+        this.storeId = storeId;
         this.orderStatus = orderStatus;
         this.totalPrice = totalPrice;
+    }
+
+    public static CustomerOrder createCustomerOrder(Long storeId, Integer totalPrice) {
+
+        return CustomerOrder.builder()
+                .storeId(storeId)
+                .orderStatus(OrderStatus.PROGRESS)
+                .totalPrice(totalPrice)
+                .build();
+
     }
 }
