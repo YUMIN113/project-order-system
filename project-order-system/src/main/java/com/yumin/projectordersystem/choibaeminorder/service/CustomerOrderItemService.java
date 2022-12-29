@@ -40,6 +40,7 @@ public class CustomerOrderItemService {
 
     }
 
+    // 주문 상품 정보 DB 저장
     public void saveCustomerOrderItemList(Long orderId, List<CustomerOrderItemRequestDto> customerOrderItemRequestDtoList) {
 
         List<CustomerOrderItem> saveCustomerOrderItem = customerOrderItemRequestDtoList
