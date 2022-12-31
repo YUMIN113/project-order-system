@@ -32,12 +32,13 @@ public class CustomerOrderItemService {
 
         // Optional 객체에 저장된 값에 접근하기 위해서 get() 메서드 사용해야 한다.
 
-//        for(CustomerOrderItemRequestDto orderMenu : customerOrderItemRequestDtoList) {
+//        Integer totalPrice = 0;
+//        for (CustomerOrderItemRequestDto orderMenu : customerOrderItemRequestDtoList) {
 //
 //            Optional<Menu> menuWrapper = menuRepository.findById(orderMenu.getMenuId());
-//            Integer totalPrice =+ menuWrapper.get().getMenuPrice() * orderMenu.getMenuCnt();
+//            totalPrice =+ menuWrapper.get().getMenuPrice() * orderMenu.getMenuCnt();
 //        }
-
+//        return totalPrice;
     }
 
     // 주문 상품 정보 생성 메서드
