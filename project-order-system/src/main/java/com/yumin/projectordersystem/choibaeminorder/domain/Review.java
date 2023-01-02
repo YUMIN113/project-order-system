@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -23,6 +27,14 @@ public class Review {
 
     @Column(name = "review_score")
     private Integer reviewScore;
+
+    @CreationTimestamp
+    @Column(name = "create_at")
+    private LocalDateTime createAt;
+
+    @UpdateTimestamp
+    @Column(name = "modify_at")
+    private LocalDateTime modifyAt;
 
     @Builder
     public Review(Long storeId, String reviewContent, Integer reviewScore) {
