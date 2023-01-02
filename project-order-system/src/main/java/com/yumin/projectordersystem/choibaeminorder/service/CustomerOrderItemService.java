@@ -1,14 +1,13 @@
 package com.yumin.projectordersystem.choibaeminorder.service;
 
 import com.yumin.projectordersystem.choibaeminorder.domain.CustomerOrderItem;
-import com.yumin.projectordersystem.choibaeminorder.domain.Menu;
 import com.yumin.projectordersystem.choibaeminorder.dto.CustomerOrderItemRequestDto;
 import com.yumin.projectordersystem.choibaeminorder.repository.CustomerOrderItemRepository;
 import com.yumin.projectordersystem.choibaeminorder.repository.MenuRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 import java.util.stream.Collectors;
 
 @Service
@@ -31,7 +30,13 @@ public class CustomerOrderItemService {
         }).reduce((x, y) -> x + y).get();
 
         // Optional 객체에 저장된 값에 접근하기 위해서 get() 메서드 사용해야 한다.
+    }
 
+
+
+//    다른 방법 : 향상된 for 문으로 totalPrice 구하기
+//    public Integer getCustomerOrderItemListTotalPrice(List<CustomerOrderItemRequestDto> customerOrderItemRequestDtoList) {
+//
 //        Integer totalPrice = 0;
 //        for (CustomerOrderItemRequestDto orderMenu : customerOrderItemRequestDtoList) {
 //
@@ -39,7 +44,9 @@ public class CustomerOrderItemService {
 //            totalPrice =+ menuWrapper.get().getMenuPrice() * orderMenu.getMenuCnt();
 //        }
 //        return totalPrice;
-    }
+//    }
+
+
 
     // 주문 상품 정보 생성 메서드
     public void saveCustomerOrderItemList(Long orderId, List<CustomerOrderItemRequestDto> customerOrderItemRequestDtoList) {
