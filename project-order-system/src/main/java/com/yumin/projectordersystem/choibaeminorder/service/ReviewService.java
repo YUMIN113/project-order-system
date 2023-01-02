@@ -28,6 +28,7 @@ public class ReviewService {
 
     // review store average + review list
     // average 에서 분모가 0일 경우, 즉 review 가 전혀 없을 경우 처리 부분 고민해야 한다.
+    // average 소수부 자릿수 제한 고민해야 한다.
     public List<StoreReviewResponseDto> saveOrderReviewScoreAverage(Long storeId) {
 
         Map<Long, List<ReviewResponseDto>> reviewResponseDtoMap =
