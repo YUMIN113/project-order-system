@@ -1,12 +1,12 @@
 package com.yumin.projectordersystem.choibaeminorder.controller;
 
 import com.yumin.projectordersystem.choibaeminorder.dto.ReviewRequestDto;
+import com.yumin.projectordersystem.choibaeminorder.dto.StoreReviewResponseDto;
 import com.yumin.projectordersystem.choibaeminorder.service.ReviewService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/review/")
@@ -26,4 +26,11 @@ public class ReviewController {
 
         return ResponseEntity.ok("ok");
     }
-}
+
+    // review score average + review list
+    @GetMapping("store-review-list/{storeId}")
+    public ResponseEntity<List<StoreReviewResponseDto>> findStoreReviewList(@PathVariable("storeId") Long storeId) {
+        return ResponseEntity.ok(reviewService.saveOrderReviewScoreAverage(storeId));
+    }
+
+ }

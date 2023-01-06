@@ -27,9 +27,10 @@ public class CustomerOrderItemService {
 
         return customerOrderItemRequestDtoList.stream().map(it -> {
             return menuRepository.findById(it.getMenuId()).get().getMenuPrice() * it.getMenuCnt();
-        }).reduce((x, y) -> x + y).get();
+        }).reduce((x, y) -> x + y).orElse(0);
 
-        // Optional 객체에 저장된 값에 접근하기 위해서 get() 메서드 사용해야 한다.
+        // Optional 객체에 들어있는 값에 접근하기 위해서 get() 사용할 수 있다. 하지만 해당 값이 null 일 경우, get()을 통해 호출하면 예외 발생 한다.
+        // 따라서 orElse() 사용했다. orElse() 통해서 해당 값이 null 일 경우 예외를 발생시키지 않고, 어떤 결과값으로 반환할 지 지정할 수 있다.
     }
 
 

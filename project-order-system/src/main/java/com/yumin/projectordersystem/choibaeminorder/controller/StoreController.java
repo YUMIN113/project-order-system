@@ -8,11 +8,13 @@ import com.yumin.projectordersystem.choibaeminorder.service.CustomerOrderItemSer
 import com.yumin.projectordersystem.choibaeminorder.service.CustomerOrderService;
 import com.yumin.projectordersystem.choibaeminorder.service.MenuService;
 import com.yumin.projectordersystem.choibaeminorder.service.StoreService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/store")
 public class StoreController {
@@ -60,5 +62,6 @@ public class StoreController {
 
         return ResponseEntity.ok("ok");
     }
+
 
 }

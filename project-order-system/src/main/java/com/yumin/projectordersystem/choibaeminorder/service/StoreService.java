@@ -16,6 +16,7 @@ public class StoreService {
         this.storeRepository = storeRepository;
     }
 
+
     public List<StoreResponseDto> getStoreList() {
         return storeRepository
                 .findAll()
