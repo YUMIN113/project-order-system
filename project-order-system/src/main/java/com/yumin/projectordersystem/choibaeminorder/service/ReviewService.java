@@ -55,7 +55,12 @@ public class ReviewService {
                 storeScoreAvg = 0;
             }
 
-            return StoreReviewResponseDto.builder().storeId(reviewStoreId).reviewScoreAvg(storeScoreAvg).reviewResponseDtoList(reviewResponseDtoMap.get(it)).build();
+            return StoreReviewResponseDto.builder()
+                    .storeId(reviewStoreId)
+                    .reviewScoreAvg(storeScoreAvg)
+                    .reviewResponseDtoList(reviewResponseDtoMap.get(it))
+                    .build();
+
         }).collect(Collectors.toList());
 
     }
