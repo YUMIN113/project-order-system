@@ -29,8 +29,8 @@ public class ReviewController {
 
     // review score average + review list
     @GetMapping("store-review-list/{storeId}")
-    public ResponseEntity<List<StoreReviewResponseDto>> findStoreReviewList(@PathVariable("storeId") Long storeId) {
-        return ResponseEntity.ok(reviewService.saveOrderReviewScoreAverage(storeId));
+    public ResponseEntity<StoreReviewResponseDto> findStoreReviewList(@PathVariable(value = "storeId") Long storeId) {
+        return ResponseEntity.ok(reviewService.getStoreReview(storeId));
     }
 
  }
