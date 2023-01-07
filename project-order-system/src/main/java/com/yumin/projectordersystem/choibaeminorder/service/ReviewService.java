@@ -82,4 +82,15 @@ public class ReviewService {
 //        }
 //    }
 
+
+
+    // review 삭제
+    public void deleteStoreReview(Long reviewId) {
+
+        Optional<Review> wrapperReview = reviewRepository.findById(reviewId);
+
+        if(wrapperReview.isPresent()) {
+            reviewRepository.delete(wrapperReview.get());
+        }
+    }
 }

@@ -41,4 +41,11 @@ public class ReviewController {
         return ResponseEntity.ok("ok");
     }
 
+    // review 삭제
+    @GetMapping("delete/{reviewId}")
+    public ResponseEntity<String> deleteReview(@PathVariable(value = "reviewId") Long reviewId) {
+        reviewService.deleteStoreReview(reviewId);
+        return ResponseEntity.ok("ok");
+    }
+
  }
