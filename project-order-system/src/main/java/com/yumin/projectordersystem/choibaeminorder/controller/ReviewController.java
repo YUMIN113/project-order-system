@@ -1,6 +1,7 @@
 package com.yumin.projectordersystem.choibaeminorder.controller;
 
 import com.yumin.projectordersystem.choibaeminorder.dto.ReviewRequestDto;
+import com.yumin.projectordersystem.choibaeminorder.dto.ReviewUpdateRequestDto;
 import com.yumin.projectordersystem.choibaeminorder.dto.StoreReviewResponseDto;
 import com.yumin.projectordersystem.choibaeminorder.service.ReviewService;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +28,17 @@ public class ReviewController {
         return ResponseEntity.ok("ok");
     }
 
-    // review score average + review list
+    // review 목록 + 평균 점수
     @GetMapping("store-review-list/{storeId}")
     public ResponseEntity<StoreReviewResponseDto> findStoreReviewList(@PathVariable(value = "storeId") Long storeId) {
         return ResponseEntity.ok(reviewService.getStoreReview(storeId));
+    }
+
+    // review 수정 (dirty checking)
+    @PostMapping("modify")
+    public ResponseEntity<String> modifyReview(@RequestBody ReviewUpdateRequestDto reviewUpdateRequestDto) {
+        reviewService.modifyStoreReview(reviewUpdateRequestDto);
+        return ResponseEntity.ok("ok");
     }
 
  }

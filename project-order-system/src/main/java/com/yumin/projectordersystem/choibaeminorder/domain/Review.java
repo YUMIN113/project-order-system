@@ -42,4 +42,10 @@ public class Review {
         this.reviewContent = reviewContent;
         this.reviewScore = reviewScore;
     }
+
+    // review 수정 메서드 (dirty checking)
+    public void updateReview(String reviewContent, Integer reviewScore) {
+        this.reviewContent = reviewContent;
+        this.reviewScore = reviewScore;
+    }
 }
