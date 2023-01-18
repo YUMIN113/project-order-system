@@ -24,6 +24,10 @@ public class CustomerOrder {
     @Column(name = "store_id")
     private Long storeId;
 
+    // Test 위해 생성
+    @Column(name = "member_id")
+    private Long memberId;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "order_status")
     private OrderStatus orderStatus;
@@ -41,18 +45,22 @@ public class CustomerOrder {
 
     @Builder
     public CustomerOrder(Long storeId,
+                         Long memberId,
                          OrderStatus orderStatus,
                          Integer totalPrice) {
         this.storeId = storeId;
+        this.memberId = memberId;
         this.orderStatus = orderStatus;
         this.totalPrice = totalPrice;
     }
 
+
     // 주문 생성 메서드
-    public static CustomerOrder createCustomerOrder(Long storeId, Integer totalPrice) {
+    public static CustomerOrder createCustomerOrder(Long storeId, Long memberId, Integer totalPrice) {
 
         return CustomerOrder.builder()
                 .storeId(storeId)
+                .memberId(memberId)
                 .orderStatus(OrderStatus.PROGRESS)
                 .totalPrice(totalPrice)
                 .build();

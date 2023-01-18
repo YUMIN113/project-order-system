@@ -13,5 +13,9 @@ public class CustomerOrderRequestDto {
 
     private Long storeId;
 
+    // Test 위해 생성
+    private Long memberId;
+
+
     private List<CustomerOrderItemRequestDto> customerOrderItemRequestDtoList;
 }

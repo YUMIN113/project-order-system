@@ -4,10 +4,7 @@ import com.yumin.projectordersystem.choibaeminorder.domain.CustomerOrder;
 import com.yumin.projectordersystem.choibaeminorder.dto.CustomerOrderRequestDto;
 import com.yumin.projectordersystem.choibaeminorder.dto.MenuResponseDto;
 import com.yumin.projectordersystem.choibaeminorder.dto.StoreResponseDto;
-import com.yumin.projectordersystem.choibaeminorder.service.CustomerOrderItemService;
-import com.yumin.projectordersystem.choibaeminorder.service.CustomerOrderService;
-import com.yumin.projectordersystem.choibaeminorder.service.MenuService;
-import com.yumin.projectordersystem.choibaeminorder.service.StoreService;
+import com.yumin.projectordersystem.choibaeminorder.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,12 +24,15 @@ public class StoreController {
 
     private final CustomerOrderService customerOrderService;
 
+    private final MileageService mileageService;
 
-    public StoreController(StoreService storeService, MenuService menuService, CustomerOrderItemService customerOrderItemService, CustomerOrderService customerOrderService) {
+
+    public StoreController(StoreService storeService, MenuService menuService, CustomerOrderItemService customerOrderItemService, CustomerOrderService customerOrderService, MileageService mileageService) {
         this.storeService = storeService;
         this.menuService = menuService;
         this.customerOrderItemService = customerOrderItemService;
         this.customerOrderService = customerOrderService;
+        this.mileageService = mileageService;
     }
 
     // 모든 점포 목록 보여주기
@@ -47,7 +47,7 @@ public class StoreController {
         return ResponseEntity.ok(menuService.getStoreMenuList(storeId));
     }
 
-    @PostMapping("store-order")
+    @PostMapping("/store-order")
     public ResponseEntity<String> enrollStoreOrder(@RequestBody CustomerOrderRequestDto customerOrderRequestDto) {
 
         // 주문 총액 구하기
@@ -55,10 +55,13 @@ public class StoreController {
 
         // 주문 정보 DB 저장
         CustomerOrder saveCustomerOrder
-                = customerOrderService.enrollCustomerOrder(customerOrderRequestDto.getStoreId(), totalPrice);
+                = customerOrderService.enrollCustomerOrder(customerOrderRequestDto.getStoreId(), customerOrderRequestDto.getMemberId(), totalPrice);
 
         // 주문 상품 정보 DB 저장
         customerOrderItemService.saveCustomerOrderItemList(saveCustomerOrder.getOrderId(), customerOrderRequestDto.getCustomerOrderItemRequestDtoList());
+
+        // 마일리지 적립
+        mileageService.saveMileage(customerOrderRequestDto.getMemberId(), totalPrice);
 
         return ResponseEntity.ok("ok");
     }

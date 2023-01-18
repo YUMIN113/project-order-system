@@ -43,11 +43,11 @@ public class CustomerOrderService {
 //
 //    }
 
-    public CustomerOrder enrollCustomerOrder(Long storeId, Integer totalPrice) {
+    public CustomerOrder enrollCustomerOrder(Long storeId, Long memberId, Integer totalPrice) {
 
 
         // customer_order DB 에 저장
-        return customerOrderRepository.save(CustomerOrder.createCustomerOrder(storeId, totalPrice));
+        return customerOrderRepository.save(CustomerOrder.createCustomerOrder(storeId, memberId, totalPrice));
 
 
 
