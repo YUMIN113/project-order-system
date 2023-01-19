@@ -1,6 +1,5 @@
-package com.yumin.projectordersystem.choibaeminorder.dto;
+package com.yumin.projectordersystem.choibaeminorder.mileage.dto;
 
-import com.yumin.projectordersystem.choibaeminorder.domain.Mileage;
 import lombok.Builder;
 
 public class MileageRequestDto {

@@ -1,4 +1,4 @@
-package com.yumin.projectordersystem.choibaeminorder.domain;
+package com.yumin.projectordersystem.choibaeminorder.mileage.domain;
 
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -38,10 +38,16 @@ public class Mileage {
         this.mileageScore = mileageScore;
     }
 
+    // 신규 구매자 마일리지 최초 적립
     public static Mileage createSaveMileage(Long memberId, Integer mileageScore) {
         return Mileage.builder()
                 .mileageScore(mileageScore)
                 .memberId(memberId)
                 .build();
+    }
+
+    // 기존 구매자 마일리지 적립
+    public void updateSaveMileage(Integer mileageScore) {
+       this.mileageScore = mileageScore;
     }
 }
