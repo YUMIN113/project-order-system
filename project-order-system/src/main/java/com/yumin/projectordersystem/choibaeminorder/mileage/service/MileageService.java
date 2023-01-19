@@ -49,6 +49,7 @@ public class MileageService {
     }
 
     // 주문 취소 시, 취소한 금액 만큼 적립한 마일리지 취소
+    @Transactional(readOnly = false)
     public void subtractMileage(List<CustomerOrderItemRequestDto> customerOrderItemRequestDtoList, Long memberId) {
 
         Integer cancelTotalPrice = customerOrderItemRequestDtoList.stream().map(it -> {
