@@ -4,7 +4,6 @@ import com.yumin.projectordersystem.choibaeminorder.domain.CustomerOrder;
 import com.yumin.projectordersystem.choibaeminorder.dto.CustomerOrderRequestDto;
 import com.yumin.projectordersystem.choibaeminorder.dto.MenuResponseDto;
 import com.yumin.projectordersystem.choibaeminorder.dto.StoreResponseDto;
-import com.yumin.projectordersystem.choibaeminorder.mileage.dto.MileageSubtractRequestDto;
 import com.yumin.projectordersystem.choibaeminorder.mileage.service.MileageService;
 import com.yumin.projectordersystem.choibaeminorder.service.*;
 import lombok.extern.slf4j.Slf4j;
@@ -63,19 +62,17 @@ public class StoreController {
         customerOrderItemService.saveCustomerOrderItemList(saveCustomerOrder.getOrderId(), customerOrderRequestDto.getCustomerOrderItemRequestDtoList());
 
         // 마일리지 적립
-        mileageService.saveMileage(customerOrderRequestDto.getMemberId(), totalPrice);
+        mileageService.saveMileage(saveCustomerOrder.getOrderId(), customerOrderRequestDto.getMemberId(), totalPrice);
 
         return ResponseEntity.ok("ok");
 
     }
 
     // 주문 취소
-    @PostMapping("/store-order-cancel")
-    public ResponseEntity<String> cancelStoreOrder(@RequestBody MileageSubtractRequestDto mileageSubtractRequestDto) {
+    @GetMapping("/store-order/{orderId}")
+    public ResponseEntity<String> cancelStoreOrder(@PathVariable(value = "orderId") Long orderId) {
 
-        // 주문 취소 시, 취소한 금액 만큼 적립한 마일리지 취소
-        mileageService.subtractMileage(mileageSubtractRequestDto.getCustomerOrderItemRequestDtoList(), mileageSubtractRequestDto.getMemberId());
-
+        mileageService.cancelMileage(orderId);
         return ResponseEntity.ok("ok");
 
     }

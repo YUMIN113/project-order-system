@@ -1,15 +1,12 @@
 package com.yumin.projectordersystem.choibaeminorder.mileage.service;
 
-import com.yumin.projectordersystem.choibaeminorder.dto.CustomerOrderItemRequestDto;
 import com.yumin.projectordersystem.choibaeminorder.mileage.domain.Mileage;
+import com.yumin.projectordersystem.choibaeminorder.mileage.enums.MileageStatus;
 import com.yumin.projectordersystem.choibaeminorder.mileage.repository.MileageRepository;
 import com.yumin.projectordersystem.choibaeminorder.repository.MenuRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
-import static java.lang.Long.sum;
 
 @Service
 public class MileageService {
@@ -23,45 +20,23 @@ public class MileageService {
         this.menuRepository = menuRepository;
     }
 
+    // 마일리지 적립
     @Transactional(readOnly = false)
-    public void saveMileage (Long memberId, Integer totalPrice) {
+    public void saveMileage (Long orderId, Long memberId, Integer totalPrice) {
 
         Integer mileageScore = (int) Math.ceil(totalPrice * 5.0 / 100);
 
+        Mileage saveMileage = Mileage.createSaveMileage(orderId, memberId, mileageScore);
+        mileageRepository.save(saveMileage);
 
-        // mileage DB 에 이미 있는 회원의 경우, mileageScore 업데이트 (즉, 이전 구매 경험이 있는 회원)
-        if (mileageRepository.findByMemberId(memberId) != null) {
-
-            Integer finalMileageScore = (int) sum(mileageRepository.findByMemberId(memberId).get().getMileageScore(), mileageScore);
-
-            mileageRepository.findByMemberId(memberId).ifPresent(it ->
-                    it.updateSaveMileage(finalMileageScore));
-
-        }
-
-        // mileage DB 에 없는 회원의 경우, 신규 등록 (즉, 이전 구매 경험이 없는 회원)
-        if (mileageRepository.findByMemberId(memberId) == null) {
-
-            Mileage saveMileage = Mileage.createSaveMileage(memberId, mileageScore);
-            mileageRepository.save(saveMileage);
-
-        }
     }
 
-    // 주문 취소 시, 취소한 금액 만큼 적립한 마일리지 취소
+    // 주문 취소 시, 취소한 주문에 해당하는 마일리지 취소 (dirty checking)
     @Transactional(readOnly = false)
-    public void subtractMileage(List<CustomerOrderItemRequestDto> customerOrderItemRequestDtoList, Long memberId) {
+    public void cancelMileage(Long orderId) {
 
-        Integer cancelTotalPrice = customerOrderItemRequestDtoList.stream().map(it -> {
-            return menuRepository.findById(it.getMenuId()).get().getMenuPrice() * it.getMenuCnt();
-        }).reduce( (x, y) -> x + y).orElse(0);
-
-        Integer cancelMileage = (int) Math.ceil(cancelTotalPrice * 5.0 / 100);
-
-        Integer finalMileageScore = mileageRepository.findByMemberId(memberId).get().getMileageScore() - (int) cancelMileage;
-
-        mileageRepository.findByMemberId(memberId).ifPresent(it ->
-                it.updateSaveMileage(finalMileageScore));
+        mileageRepository.findByOrderId(orderId).ifPresent(it ->
+                it.updateSaveMileage(MileageStatus.CANCEL));
 
     }
 }
