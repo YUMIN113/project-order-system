@@ -1,11 +1,15 @@
 package com.yumin.projectordersystem.choibaeminorder.mileage.service;
 
 import com.yumin.projectordersystem.choibaeminorder.mileage.domain.Mileage;
+import com.yumin.projectordersystem.choibaeminorder.mileage.dto.MileageResponseDto;
 import com.yumin.projectordersystem.choibaeminorder.mileage.enums.MileageStatus;
 import com.yumin.projectordersystem.choibaeminorder.mileage.repository.MileageRepository;
 import com.yumin.projectordersystem.choibaeminorder.repository.MenuRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -38,5 +42,13 @@ public class MileageService {
         mileageRepository.findByOrderId(orderId).ifPresent(it ->
                 it.updateSaveMileage(MileageStatus.CANCEL));
 
+    }
+
+    public List<MileageResponseDto> getMileageList(Long memberId) {
+        return mileageRepository
+                .findByMemberId(memberId)
+                .stream()
+                .map(MileageResponseDto::of)
+                .collect(Collectors.toList());
     }
 }
