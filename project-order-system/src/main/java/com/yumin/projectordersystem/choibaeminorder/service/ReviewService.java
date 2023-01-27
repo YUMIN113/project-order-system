@@ -51,7 +51,8 @@ public class ReviewService {
                 .builder()
                 .storeId(storeId)
                 .reviewScoreAvg(storeScoreAvg)
-                .reviewResponseDtoList(reviewResponseDtoList).build();
+                .reviewResponseDtoList(reviewResponseDtoList)
+                .build();
 
     }
 

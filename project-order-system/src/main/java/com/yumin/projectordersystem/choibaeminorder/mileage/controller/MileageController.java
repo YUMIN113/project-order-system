@@ -1,5 +1,6 @@
 package com.yumin.projectordersystem.choibaeminorder.mileage.controller;
 
+import com.yumin.projectordersystem.choibaeminorder.mileage.dto.MemberMileageResponseDto;
 import com.yumin.projectordersystem.choibaeminorder.mileage.dto.MileageResponseDto;
 import com.yumin.projectordersystem.choibaeminorder.mileage.service.MileageService;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class MileageController {
     }
 
     @GetMapping("/{memberId}")
-    public ResponseEntity<List<MileageResponseDto>> findMileageList(@PathVariable(value = "memberId") Long memberId) {
-        return ResponseEntity.ok(mileageService.getMileageList(memberId));
+    public ResponseEntity<MemberMileageResponseDto> findMileageList(@PathVariable(value = "memberId") Long memberId) {
+        return ResponseEntity.ok(mileageService.getMemberMileage(memberId));
     }
 }

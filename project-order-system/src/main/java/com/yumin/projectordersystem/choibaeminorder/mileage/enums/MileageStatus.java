@@ -9,4 +9,8 @@ public enum MileageStatus {
     MileageStatus(String mileageStatusDescription) {
         this.mileageStatusDescription = mileageStatusDescription;
     }
+
+    public String getMileageStatusDescription() {
+        return mileageStatusDescription;
+    }
 }

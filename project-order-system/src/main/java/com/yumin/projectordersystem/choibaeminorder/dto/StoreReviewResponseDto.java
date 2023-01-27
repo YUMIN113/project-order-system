@@ -12,11 +12,11 @@ import java.util.List;
 @NoArgsConstructor
 public class StoreReviewResponseDto {
 
-    Long storeId;
+    private Long storeId;
 
-    Double reviewScoreAvg;
+    private Double reviewScoreAvg;
 
-    List<ReviewResponseDto> reviewResponseDtoList;
+    private List<ReviewResponseDto> reviewResponseDtoList;
 
     @Builder
     public StoreReviewResponseDto(Long storeId,

@@ -15,6 +15,8 @@ public class MileageResponseDto {
 
     private Long memberId;
 
+    private Long orderId;
+
     private Integer mileageScore;
 
     private MileageStatus mileageStatus;
@@ -23,10 +25,12 @@ public class MileageResponseDto {
 
     @Builder
     public MileageResponseDto(Long memberId,
+                              Long orderId,
                               Integer mileageScore,
                               MileageStatus mileageStatus,
                               LocalDateTime createAt) {
         this.memberId = memberId;
+        this.orderId = orderId;
         this.mileageScore = mileageScore;
         this.mileageStatus = mileageStatus;
         this.createAt = createAt;
@@ -35,6 +39,7 @@ public class MileageResponseDto {
     public static MileageResponseDto of(Mileage mileage) {
         return MileageResponseDto.builder()
                 .memberId(mileage.getMemberId())
+                .orderId(mileage.getOrderId())
                 .mileageScore(mileage.getMileageScore())
                 .mileageStatus(mileage.getMileageStatus())
                 .createAt(mileage.getCreateAt())

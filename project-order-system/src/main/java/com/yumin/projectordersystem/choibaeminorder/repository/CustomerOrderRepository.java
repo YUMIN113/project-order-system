@@ -9,6 +9,4 @@ import java.util.List;
 @Repository
 public interface CustomerOrderRepository extends JpaRepository<CustomerOrder, Long> {
 
-    List<Long> findAllByTotalPrice();
-
 }
