@@ -39,30 +39,34 @@ public class MileageService {
     // 주문 취소 시, 취소한 주문에 해당하는 마일리지 취소 (dirty checking)
     @Transactional(readOnly = false)
     public void cancelMileage(Long orderId) {
-
         mileageRepository.findByOrderId(orderId).ifPresent(it ->
                 it.updateSaveMileage(MileageStatus.CANCEL));
-
     }
 
     // 개인별 마일리지 List
+    @Transactional(readOnly = true)
     public MemberMileageResponseDto getMemberMileage(Long memberId) {
 
-        List<MileageResponseDto> mileageResponseDtoList = mileageRepository
+        List<MileageResponseDto> mileageResponseDtoList = getMileageResponseDtoList(memberId);
+
+        // mileageStatus 가 SAVE("적립") 인 경우의 mileageScore 총 합
+        Integer totalMileage = getTotalMileage(mileageResponseDtoList);
+
+        return MemberMileageResponseDto.of(totalMileage, mileageResponseDtoList);
+    }
+    
+    private List<MileageResponseDto> getMileageResponseDtoList(Long memberId) {
+        return mileageRepository
                 .findByMemberId(memberId)
                 .stream()
                 .map(MileageResponseDto::of)
                 .collect(Collectors.toList());
+    }
 
-        // mileageStatus 가 SAVE("적립") 인 경우의 mileageScore 총 합
-        Integer totalMileage = mileageResponseDtoList.stream()
-                .filter(it -> it.getMileageStatus().equals(MileageStatus.SAVE))
+    private static Integer getTotalMileage(List<MileageResponseDto> mileageResponseDtoList) {
+        return mileageResponseDtoList.stream()
+                .filter(it -> MileageStatus.SAVE.equals(it.getMileageStatus()))
                 .map(it -> it.getMileageScore())
                 .reduce((x, y) -> x + y).orElse(0);
-
-        return MemberMileageResponseDto.builder()
-                .totalMileage(totalMileage)
-                .mileageResponseDtoList(mileageResponseDtoList)
-                .build();
     }
 }

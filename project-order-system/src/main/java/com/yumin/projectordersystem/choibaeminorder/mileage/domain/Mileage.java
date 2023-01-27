@@ -29,7 +29,7 @@ public class Mileage {
     private Integer mileageScore;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "mileage_status")
+    @Column(name = "mileage_status", nullable = false)
     private MileageStatus mileageStatus;
 
     @CreationTimestamp

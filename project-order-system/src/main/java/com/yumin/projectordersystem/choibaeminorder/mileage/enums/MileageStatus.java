@@ -1,5 +1,8 @@
 package com.yumin.projectordersystem.choibaeminorder.mileage.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum MileageStatus {
 
     SAVE("적립"), USE("사용"), CANCEL("취소");
@@ -10,7 +13,4 @@ public enum MileageStatus {
         this.mileageStatusDescription = mileageStatusDescription;
     }
 
-    public String getMileageStatusDescription() {
-        return mileageStatusDescription;
-    }
 }

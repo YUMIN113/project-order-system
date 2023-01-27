@@ -22,4 +22,12 @@ public class MemberMileageResponseDto {
         this.totalMileage = totalMileage;
         this.mileageResponseDtoList = mileageResponseDtoList;
     }
+
+    public static MemberMileageResponseDto of(Integer totalMileage,
+                                              List<MileageResponseDto> mileageResponseDtoList) {
+        return MemberMileageResponseDto.builder()
+                .totalMileage(totalMileage)
+                .mileageResponseDtoList(mileageResponseDtoList)
+                .build();
+    }
 }
