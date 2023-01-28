@@ -65,7 +65,7 @@ public class MileageService {
 
     private static Integer getTotalMileage(List<MileageResponseDto> mileageResponseDtoList) {
         return mileageResponseDtoList.stream()
-                .filter(it -> MileageStatus.SAVE.equals(it.getMileageStatus()))
+                .filter(it -> MileageStatus.SAVE.equals(it.getMileageStatus())) // NullPointerException 을 다루기 위해, null 값이 발생 할 수도 있는 it.getMileageStatus() 를 equals(A) 의 A 에 넣는다.
                 .map(it -> it.getMileageScore())
                 .reduce((x, y) -> x + y).orElse(0);
     }
