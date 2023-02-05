@@ -8,7 +8,7 @@
 <body>
 <div id="map" style="width:100%;height:350px;"></div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ceed33d6c575c7cc7adca0dd7b3f540a&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=key 입력&libraries=services"></script>
 <script>
   // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
   var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -76,7 +76,7 @@
       infowindow.open(map, marker);
     });
 
-    
+
     // 마커에 마우스아웃 이벤트를 등록합니다
     kakao.maps.event.addListener(marker, 'mouseout', function() {
       // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
