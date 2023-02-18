@@ -29,9 +29,15 @@ public class CustomerOrderItemService {
             return menuRepository.findById(it.getMenuId()).get().getMenuPrice() * it.getMenuCnt();
         }).reduce((x, y) -> x + y).orElse(0);
 
-        // Optional 객체에 들어있는 값에 접근하기 위해서 get() 사용할 수 있다. 하지만 해당 값이 null 일 경우, get()을 통해 호출하면 예외 발생 한다.
-        // 따라서 orElse() 사용했다. orElse() 통해서 해당 값이 null 일 경우 예외를 발생시키지 않고, 어떤 결과값으로 반환할 지 지정할 수 있다.
     }
+
+//         return customerOrderItemRequestDtoList.stream().map(it -> {
+//             return menuRepository.findById(it.getMenuId()).get().getMenuPrice() * it.getMenuCnt();
+//         }).reduce(0, (x, y) -> x + y);
+
+    // Optional 객체에 들어있는 값에 접근하기 위해서 get() 사용할 수 있다. 하지만 해당 값이 null 일 경우, get()을 통해 호출하면 예외 발생 한다.
+    // 따라서 orElse() 사용했다. orElse() 통해서 해당 값이 null 일 경우 예외를 발생시키지 않고, 어떤 결과값으로 반환할 지 지정할 수 있다.
+    // reduce() 에서 identity 값 지정한다면 Optional 이 아닌 Integer 로 결과값 도출할 수 있다.
 
 
 
